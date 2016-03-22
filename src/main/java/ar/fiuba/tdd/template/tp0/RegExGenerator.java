@@ -24,17 +24,25 @@ public class RegExGenerator {
         StringBuilder example = new StringBuilder();
         counter = 0;
         while (counter < regEx.length()) {
-            if (regEx.charAt(counter) == '[') { example.append(caseCorchete()); }
+            if (regEx.charAt(counter) == '[') {
+                example.append(caseCorchete());
+            }
             else {
-                if (regEx.charAt(counter) == '.') { example.append(caseDot()); }
+                if (regEx.charAt(counter) == '.') {
+                    example.append(caseDot());
+                }
                 else {
-                    if (regEx.charAt(counter) == '\\') { example.append(caseBarra()); }
-                    else { example.append(caseChar()); }
+                    if (regEx.charAt(counter) == '\\') {
+                        example.append(caseBarra());
+                    }
+                    else {
+                        example.append(caseChar());
+                    }
                 }
             }
         }
         return example.toString();
-   }
+    }
 
     boolean isCuantifier(char element) {
         return (element == '*' || element == '?' || element == '+');
@@ -58,7 +66,7 @@ public class RegExGenerator {
 
     String caseChar() {
         String result;
-        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
+        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExCharCuantifier(regEx.charAt(counter + 1),Character.toString(regEx.charAt(counter)));
             counter += 2;
         }
@@ -71,7 +79,7 @@ public class RegExGenerator {
 
     String caseDot() {
         String result;
-        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
+        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExDotCuantifier(regEx.charAt(counter + 1));
             counter += 2;
         }
@@ -141,9 +149,16 @@ public class RegExGenerator {
     int getNumRepDependingOnCuantifier(char cuantifier) {
         int numberOfRepetitionsOfCuantifier = 0;
         Random randomGenerator = new Random();
-        if (cuantifier == '*') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX); }
-        if (cuantifier == '?') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2); }
-        if (cuantifier == '+') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1; }
+        if (cuantifier == '*') {
+            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX);
+        }
+        if (cuantifier == '?') {
+            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2);
+        }
+        if (cuantifier == '+') {
+            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1;
+        }
+
         return numberOfRepetitionsOfCuantifier;
     }
 
