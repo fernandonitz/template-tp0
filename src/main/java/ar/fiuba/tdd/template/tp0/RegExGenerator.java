@@ -1,8 +1,8 @@
 package ar.fiuba.tdd.template.tp0;
-import java.util.Random;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RegExGenerator {
     static final int LONG_MAX = 65;
@@ -14,23 +14,27 @@ public class RegExGenerator {
     public List<String> generate(String regEx, int numberOfResults) {
         this.regEx = regEx;
         List<String> examples = new ArrayList<>();
-        for (int i=0;i<numberOfResults;i++)
-            examples.add(_generate());
+        for (int i = 0;i < numberOfResults;i++) {
+            examples.add(generate());
+        }
         return examples;
     }
 
-    public String _generate() {
+    public String generate() {
         StringBuilder example = new StringBuilder();
         counter = 0;
-        while (counter<regEx.length()) {
-            if (regEx.charAt(counter) == '[')
+        while (counter < regEx.length()) {
+            if (regEx.charAt(counter) == '['){
                 example.append(caseCorchete());
+            }
             else {
-                if (regEx.charAt(counter) == '.')
+                if (regEx.charAt(counter) == '.') {
                     example.append(caseDot());
+                }
                 else {
-                    if (regEx.charAt(counter) == '\\')
+                    if (regEx.charAt(counter) == '\\') {
                         example.append(caseBarra());
+                    }
                     else {
                         example.append(caseChar());
                     }
@@ -75,9 +79,9 @@ public class RegExGenerator {
 
     String caseDot(){
         String result;
-        if((counter+1 != regEx.length()) && isCuantifier(regEx.charAt(counter+1))){
-            result = getExDotCuantifier(regEx.charAt(counter+1));
-            counter+=2;
+        if((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
+            result = getExDotCuantifier(regEx.charAt(counter + 1));
+            counter += 2;
         }
         else{
             result = getExDot();
@@ -120,14 +124,14 @@ public class RegExGenerator {
 
     String getExCorcheteCuantifier(char cuantifier, String elements){
         StringBuilder finalString = new StringBuilder();
-        for (int i=0;i<getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
             finalString.append(getExCorchete(elements));
         }
         return finalString.toString();
     }
     String getExDotCuantifier(char cuantifier){
         StringBuilder finalString = new StringBuilder();
-        for (int i=0;i<getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
             finalString.append(getExDot());
         }
         return finalString.toString();
@@ -135,14 +139,14 @@ public class RegExGenerator {
 
     String getExCharCuantifier(char cuantifier,String element){
         StringBuilder finalString = new StringBuilder();
-        for (int i=0;i<getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
             finalString.append(element);
         }
         return finalString.toString();
     }
 
     int getNumRepDependingOnCuantifier(char cuantifier){
-        int numberOfRepetitionsOfCuantifier=0;
+        int numberOfRepetitionsOfCuantifier = 0;
         Random randomGenerator = new Random();
         if(cuantifier == '*') numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX);
         if(cuantifier == '?') numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2);
