@@ -24,9 +24,7 @@ public class RegExGenerator {
         StringBuilder example = new StringBuilder();
         counter = 0;
         while (counter < regEx.length()) {
-            if (regEx.charAt(counter) == '[') {
-                example.append(caseCorchete());
-            }
+            if (regEx.charAt(counter) == '[') { example.append(caseCorchete()); }
             else {
                 if (regEx.charAt(counter) == '.') { example.append(caseDot()); }
                 else {
@@ -44,12 +42,12 @@ public class RegExGenerator {
 
     String caseBarra() {
         String result = null;
-        if ((counter + 1 != regEx.length()) && (counter + 2 != regEx.length()) && isCuantifier(regEx.charAt(counter + 2))){
+        if ((counter + 1 != regEx.length()) && (counter + 2 != regEx.length()) && isCuantifier(regEx.charAt(counter + 2))) {
             result = getExCharCuantifier(regEx.charAt(counter + 2),Character.toString(regEx.charAt(counter + 1)));
             counter += 3;
         }
         else {
-            if (counter+1 != regEx.length()) {
+            if (counter + 1 != regEx.length()) {
                 result = Character.toString(regEx.charAt(counter + 1));
                 counter += 2;
             }
@@ -88,7 +86,7 @@ public class RegExGenerator {
         StringBuilder corcheteContent = new StringBuilder();
         String result;
         counter++;
-        while (regEx.charAt(counter) != ']'){
+        while (regEx.charAt(counter) != ']') {
             corcheteContent.append(regEx.charAt(counter));
             counter++;
         }
@@ -123,6 +121,7 @@ public class RegExGenerator {
         }
         return finalString.toString();
     }
+
     String getExDotCuantifier(char cuantifier) {
         StringBuilder finalString = new StringBuilder();
         for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
@@ -142,9 +141,9 @@ public class RegExGenerator {
     int getNumRepDependingOnCuantifier(char cuantifier) {
         int numberOfRepetitionsOfCuantifier = 0;
         Random randomGenerator = new Random();
-        if(cuantifier == '*') numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX);
-        if(cuantifier == '?') numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2);
-        if(cuantifier == '+') numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX -1) + 1;
+        if (cuantifier == '*') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX); }
+        if (cuantifier == '?') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2); }
+        if (cuantifier == '+') { numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1; }
         return numberOfRepetitionsOfCuantifier;
     }
 
