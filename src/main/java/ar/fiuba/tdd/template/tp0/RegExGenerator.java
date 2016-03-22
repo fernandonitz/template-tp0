@@ -11,12 +11,9 @@ public class RegExGenerator {
     private int counter;
     private String regEx;
 
-    // TODO: Uncomment parameters
     public List<String> generate(String regEx, int numberOfResults) {
         this.regEx = regEx;
-        ArrayList<String> examples = new ArrayList<String>();
-        //el warning acá es verdad que se puede cambiar, pero debido a que es así como se pide
-        // la salida del problema, no hay forma de solucionarlo...(warning inherente al problema)
+        List<String> examples = new ArrayList<>();
         for (int i=0;i<numberOfResults;i++)
             examples.add(_generate());
         return examples;
