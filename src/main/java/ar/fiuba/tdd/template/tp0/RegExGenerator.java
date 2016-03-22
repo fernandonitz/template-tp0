@@ -24,20 +24,14 @@ public class RegExGenerator {
         StringBuilder example = new StringBuilder();
         counter = 0;
         while (counter < regEx.length()) {
-            if (regEx.charAt(counter) == '['){
+            if (regEx.charAt(counter) == '[') {
                 example.append(caseCorchete());
             }
             else {
-                if (regEx.charAt(counter) == '.') {
-                    example.append(caseDot());
-                }
+                if (regEx.charAt(counter) == '.') { example.append(caseDot()); }
                 else {
-                    if (regEx.charAt(counter) == '\\') {
-                        example.append(caseBarra());
-                    }
-                    else {
-                        example.append(caseChar());
-                    }
+                    if (regEx.charAt(counter) == '\\') { example.append(caseBarra()); }
+                    else { example.append(caseChar()); }
                 }
             }
         }
@@ -55,7 +49,7 @@ public class RegExGenerator {
             counter += 3;
         }
         else {
-            if (counter+1 != regEx.length()){
+            if (counter+1 != regEx.length()) {
                 result = Character.toString(regEx.charAt(counter + 1));
                 counter += 2;
             }
@@ -66,7 +60,7 @@ public class RegExGenerator {
 
     String caseChar() {
         String result;
-        if ((counter+1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
+        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
             result = getExCharCuantifier(regEx.charAt(counter + 1),Character.toString(regEx.charAt(counter)));
             counter += 2;
         }
@@ -98,7 +92,7 @@ public class RegExGenerator {
             corcheteContent.append(regEx.charAt(counter));
             counter++;
         }
-        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))){
+        if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExCorcheteCuantifier(regEx.charAt(counter + 1),corcheteContent.toString());
             counter += 2;
         }
@@ -124,14 +118,14 @@ public class RegExGenerator {
 
     String getExCorcheteCuantifier(char cuantifier, String elements) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
             finalString.append(getExCorchete(elements));
         }
         return finalString.toString();
     }
     String getExDotCuantifier(char cuantifier) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
             finalString.append(getExDot());
         }
         return finalString.toString();
@@ -139,7 +133,7 @@ public class RegExGenerator {
 
     String getExCharCuantifier(char cuantifier,String element) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++){
+        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
             finalString.append(element);
         }
         return finalString.toString();
