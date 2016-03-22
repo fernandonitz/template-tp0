@@ -140,18 +140,17 @@ public class RegExGenerator {
     }
 
     int getNumRepOfCuantifier(char cuantifier) {
-        int numOfRepOfCuantifier = 0;
+        int numOfRepOfCuantifier;
         Random randomGenerator = new Random();
         if (cuantifier == '*') {
             numOfRepOfCuantifier = randomGenerator.nextInt(LONG_MAX);
+        } else {
+            if (cuantifier == '?') {
+                numOfRepOfCuantifier = randomGenerator.nextInt(2);
+            } else {
+                numOfRepOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1;
+            }
         }
-        if (cuantifier == '?') {
-            numOfRepOfCuantifier = randomGenerator.nextInt(2);
-        }
-        if (cuantifier == '+') {
-            numOfRepOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1;
-        }
-
         return numOfRepOfCuantifier;
     }
 
