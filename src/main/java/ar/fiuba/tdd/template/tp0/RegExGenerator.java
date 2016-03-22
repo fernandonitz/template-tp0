@@ -26,16 +26,13 @@ public class RegExGenerator {
         while (counter < regEx.length()) {
             if (regEx.charAt(counter) == '[') {
                 example.append(caseCorchete());
-            }
-            else {
+            } else {
                 if (regEx.charAt(counter) == '.') {
                     example.append(caseDot());
-                }
-                else {
+                } else {
                     if (regEx.charAt(counter) == '\\') {
                         example.append(caseBarra());
-                    }
-                    else {
+                    } else {
                         example.append(caseChar());
                     }
                 }
@@ -53,8 +50,7 @@ public class RegExGenerator {
         if ((counter + 1 != regEx.length()) && (counter + 2 != regEx.length()) && isCuantifier(regEx.charAt(counter + 2))) {
             result = getExCharCuantifier(regEx.charAt(counter + 2),Character.toString(regEx.charAt(counter + 1)));
             counter += 3;
-        }
-        else {
+        } else {
             if (counter + 1 != regEx.length()) {
                 result = Character.toString(regEx.charAt(counter + 1));
                 counter += 2;
@@ -69,8 +65,7 @@ public class RegExGenerator {
         if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExCharCuantifier(regEx.charAt(counter + 1),Character.toString(regEx.charAt(counter)));
             counter += 2;
-        }
-        else {
+        } else {
             result = Character.toString(regEx.charAt(counter));
             counter++;
         }
@@ -82,8 +77,7 @@ public class RegExGenerator {
         if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExDotCuantifier(regEx.charAt(counter + 1));
             counter += 2;
-        }
-        else {
+        } else {
             result = getExDot();
             counter++;
         }
@@ -101,8 +95,7 @@ public class RegExGenerator {
         if ((counter + 1 != regEx.length()) && isCuantifier(regEx.charAt(counter + 1))) {
             result = getExCorcheteCuantifier(regEx.charAt(counter + 1),corcheteContent.toString());
             counter += 2;
-        }
-        else {
+        } else {
             result = getExCorchete(corcheteContent.toString());
             counter++;
         }
@@ -124,7 +117,7 @@ public class RegExGenerator {
 
     String getExCorcheteCuantifier(char cuantifier, String elements) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
+        for (int i = 0; i < getNumRepOfCuantifier(cuantifier); i++) {
             finalString.append(getExCorchete(elements));
         }
         return finalString.toString();
@@ -132,7 +125,7 @@ public class RegExGenerator {
 
     String getExDotCuantifier(char cuantifier) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
+        for (int i = 0; i < getNumRepOfCuantifier(cuantifier); i++) {
             finalString.append(getExDot());
         }
         return finalString.toString();
@@ -140,26 +133,26 @@ public class RegExGenerator {
 
     String getExCharCuantifier(char cuantifier,String element) {
         StringBuilder finalString = new StringBuilder();
-        for (int i = 0;i < getNumRepDependingOnCuantifier(cuantifier);i++) {
+        for (int i = 0; i < getNumRepOfCuantifier(cuantifier); i++) {
             finalString.append(element);
         }
         return finalString.toString();
     }
 
-    int getNumRepDependingOnCuantifier(char cuantifier) {
-        int numberOfRepetitionsOfCuantifier = 0;
+    int getNumRepOfCuantifier(char cuantifier) {
+        int numOfRepOfCuantifier = 0;
         Random randomGenerator = new Random();
         if (cuantifier == '*') {
-            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX);
+            numOfRepOfCuantifier = randomGenerator.nextInt(LONG_MAX);
         }
         if (cuantifier == '?') {
-            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(2);
+            numOfRepOfCuantifier = randomGenerator.nextInt(2);
         }
         if (cuantifier == '+') {
-            numberOfRepetitionsOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1;
+            numOfRepOfCuantifier = randomGenerator.nextInt(LONG_MAX - 1) + 1;
         }
 
-        return numberOfRepetitionsOfCuantifier;
+        return numOfRepOfCuantifier;
     }
 
 
