@@ -46,6 +46,7 @@ public class RegExGenerator {
     }
 
     String caseBarra() {
+        /*
         String result = null;
         if ((counter + 1 != regEx.length()) && (counter + 2 != regEx.length()) && isCuantifier(regEx.charAt(counter + 2))) {
             result = getExCharCuantifier(regEx.charAt(counter + 2),Character.toString(regEx.charAt(counter + 1)));
@@ -56,8 +57,10 @@ public class RegExGenerator {
                 counter += 2;
             }
         }
-
         return result;
+        */
+        counter++;
+        return caseChar();
     }
 
     String caseChar() {
@@ -139,7 +142,7 @@ public class RegExGenerator {
         return finalString.toString();
     }
 
-    int getNumRepOfCuantifier(char cuantifier) {
+    int getNumRepOfCuantifier(char cuantifier){
         int numOfRepOfCuantifier;
         Random randomGenerator = new Random();
         if (cuantifier == '*') {
@@ -153,6 +156,5 @@ public class RegExGenerator {
         }
         return numOfRepOfCuantifier;
     }
-
 
 }
